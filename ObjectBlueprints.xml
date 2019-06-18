@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<objects>
+  <object Name="Googly Eyes" Inherits="Trinket">
+    <part Name="Render" DisplayName="&amp;yg&amp;Ko&amp;yo&amp;Kg&amp;yly eyes" RenderString="*" DetailColor="K" ColorString="&amp;y" RenderLayer="5" Tile="items/QugglyEyes.png"></part>
+    <part Name="Commerce" Value="15"></part>
+    <part Name="Examiner" UnknownDisplayName="&amp;wpair of disembodied eyes" AlternateDisplayName="&amp;wpair of disembodied eyes" Complexity="1"></part>
+    <part Name="Description" Short="A pair of intimidating artificial eyes"></part>
+    <part Name="Physics" Category="Trade Goods"></part>
+    <part Name="NoRust"></part>
+    <part Name="acegiak_GooglyEyes"></part>
+  </object>
+  </objects>
