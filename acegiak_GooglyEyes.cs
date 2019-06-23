@@ -10,7 +10,7 @@ namespace XRL.World.Parts
 	{
 		public acegiak_GooglyEyes()
 		{
-			base.Name = "Crayons";
+			base.Name = "Googly Eyes";
 		}
 
 		public override bool SameAs(IPart p)
@@ -26,9 +26,12 @@ namespace XRL.World.Parts
 		}
 
 
-		public void Googlify(GameObject GO){
+		public void Googlify(GameObject GO,GameObject Googler){
             GO.AddPart(new acegiak_ModGoogly());
             Popup.Show(GO.The+GO.DisplayNameOnly+GO.GetVerb("look")+" very intimidating.");
+            if(GO.pBrain != null){
+                GO.pBrain.AdjustFeeling(Googler,-1);
+            }
             ParentObject.ForceUnequipAndRemove(true);
         }
 
@@ -63,9 +66,9 @@ namespace XRL.World.Parts
 					cell = cell.GetCellFromDirection(text2);
 					if (cell != null)
 					{
-							if (cell.Objects.Count > 0 && cell.Objects[0].pRender != null)
+							if (cell.Objects.Count > 0 && cell.GetHighestRenderLayerObject()!= null)
 							{
-								Googlify(cell.Objects[0]);
+								Googlify(cell.GetHighestRenderLayerObject(),E.GetGameObjectParameter("Owner"));
 							}else{
                                 Popup.Show("The googly eyes don't stick.");
                                 return false;

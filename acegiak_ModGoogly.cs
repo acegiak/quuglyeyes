@@ -61,6 +61,9 @@ namespace XRL.World.Parts
             if (E.ID == "AfterLookedAt")
 			{
 				GameObject gameObjectParameter = E.GetGameObjectParameter("Looker");
+				if(gameObjectParameter == null){
+					gameObjectParameter = XRLCore.Core.Game.Player.Body;
+				}
 				if (gameObjectParameter != null && !gameObjectParameter.HasEffect("Shaken"))
 				{
                     if(gameObjectParameter.IsPlayer()){
