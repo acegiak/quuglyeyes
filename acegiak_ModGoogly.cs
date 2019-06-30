@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using XRL.Rules;
+using XRL.Core;
 using XRL.World.Parts.Skill;
 using XRL.World.Parts.Effects;
 using XRL.UI;
