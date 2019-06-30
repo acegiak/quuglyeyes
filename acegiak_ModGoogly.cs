@@ -62,7 +62,7 @@ namespace XRL.World.Parts
 			{
 				GameObject gameObjectParameter = E.GetGameObjectParameter("Looker");
 				if(gameObjectParameter == null){
-					gameObjectParameter = XRLCore.Core.Game.Player.Body;
+					gameObjectParameter = IPart.ThePlayer;
 				}
 				if (gameObjectParameter != null && !gameObjectParameter.HasEffect("Shaken"))
 				{
