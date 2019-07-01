@@ -77,12 +77,21 @@ namespace XRL.World.Parts
 			}
 			if (E.ID == "WeaponHit")
 			{
-				if ((Chance >= 100 || Stat.Random(1, 100) <= Chance) && IsReady(UseCharge: true))
+				if ((Chance >= 100 || Stat.Random(1, 100) <= Chance))
 				{
 					GameObject gameObjectParameter = E.GetGameObjectParameter("Attacker");
 					GameObject gameObjectParameter2 = E.GetGameObjectParameter("Defender");
                     IPart.AddPlayerMessage(gameObjectParameter2.The+gameObjectParameter2.DisplayNameOnly+gameObjectParameter2.GetVerb("is")+" disturbed by "+ParentObject.the+ParentObject.DisplayNameOnly+"'s intimidating eyes.");
-					gameObjectParameter2.ApplyEffect(new Shaken(Stat.Random(300, 360), 1));				}
+					gameObjectParameter2.ApplyEffect(new Shaken(Stat.Random(300, 360), 1));
+				}
+			}if (E.ID == "TakeDamage")
+			{
+				if (ParentObject.GetPart<Armor>() != null && (Chance >= 100 || Stat.Random(1, 100) <= Chance))
+				{
+					GameObject gameObjectParameter = E.GetGameObjectParameter("Attacker");
+                    IPart.AddPlayerMessage(gameObjectParameter.The+gameObjectParameter.DisplayNameOnly+gameObjectParameter.GetVerb("is")+" disturbed by "+ParentObject.the+ParentObject.DisplayNameOnly+"'s intimidating eyes.");
+					gameObjectParameter.ApplyEffect(new Shaken(Stat.Random(300, 360), 1));
+				}
 			}
 			else if (E.ID == "GetShortDescription")
 			{
