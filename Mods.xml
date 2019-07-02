@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <mods>
-  <mod Part="acegiak_ModGoogly" Tables="CommonMods,PotteryMods" Rarity="C" MinTier="0" MaxTier="99" TinkerAllowed="false" TinkerDisplayName="&amp;yg&amp;Ko&amp;yo&amp;Kg&amp;yly" Value="2" Description="&amp;yg&amp;Ko&amp;yo&amp;Kg&amp;yly: This item has been adorned with an intimidating set of artificial eyes." />
+  <mod Part="acegiak_ModGoogly" Tables="CommonMods,PotteryMods" Rarity="U" MinTier="0" MaxTier="99" TinkerAllowed="false" TinkerDisplayName="&amp;yg&amp;Ko&amp;yo&amp;Kg&amp;yly" Value="2" Description="&amp;yg&amp;Ko&amp;yo&amp;Kg&amp;yly: This item has been adorned with an intimidating set of artificial eyes." />
 </mods>
