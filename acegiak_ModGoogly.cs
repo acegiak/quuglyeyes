@@ -11,7 +11,7 @@ namespace XRL.World.Parts
 	[Serializable]
 	public class acegiak_ModGoogly : IModification
 	{
-		public int Chance = 2;
+		public int Chance = 5;
 
 		public acegiak_ModGoogly()
 		{
