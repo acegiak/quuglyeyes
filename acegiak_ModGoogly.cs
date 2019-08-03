@@ -86,7 +86,7 @@ namespace XRL.World.Parts
 				}
 			}if (E.ID == "TakeDamage")
 			{
-				if (ParentObject.GetPart<Armor>() != null && (Chance >= 100 || Stat.Random(1, 100) <= Chance))
+				if ((ParentObject.GetPart<Armor>() != null || ParentObject.GetPart<Body>() != null)&& (Chance >= 100 || Stat.Random(1, 100) <= Chance))
 				{
 					GameObject gameObjectParameter = E.GetGameObjectParameter("Attacker");
                     IPart.AddPlayerMessage(gameObjectParameter.The+gameObjectParameter.DisplayNameOnly+gameObjectParameter.GetVerb("is")+" disturbed by "+ParentObject.the+ParentObject.DisplayNameOnly+"'s intimidating eyes.");
@@ -99,6 +99,7 @@ namespace XRL.World.Parts
 			}
 			else if ((E.ID == "GetDisplayName" || E.ID == "GetShortDisplayName") && ParentObject.Understood() && !ParentObject.HasProperName)
 			{
+				E.GetParameter<StringBuilder>("DisplayName").Replace("eyeless ","");
 				E.GetParameter<StringBuilder>("Prefix").Append("&yg&Ko&yo&Kg&yly &y");
 			}
 			return base.FireEvent(E);
