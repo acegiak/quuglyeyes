@@ -53,6 +53,7 @@ namespace XRL.World.Parts
 			Object.RegisterPartEvent(this, "GetShortDisplayName");
 			Object.RegisterPartEvent(this, "GetShortDescription");
 			Object.RegisterPartEvent(this, "WeaponHit");
+			Object.RegisterPartEvent(this, "TakeDamage");
 			Object.RegisterPartEvent(this, "AfterLookedAt");
 			base.Register(Object);
 		}
@@ -75,22 +76,35 @@ namespace XRL.World.Parts
 					gameObjectParameter.ApplyEffect(new Shaken(Stat.Random(300, 360), 1));
 				}
 			}
+			int StartAngle = 85;
+			int EndAngle = 185;
+			float num = 0f;
+			float num2 = 0f;
+			float num3 = (float)XRL.Rules.Stat.RandomCosmetic(StartAngle, EndAngle) / 58f;
+			num = (float)Math.Sin(num3) / 6f;
+			num2 = (float)Math.Cos(num3) / 6f;
 			if (E.ID == "WeaponHit")
 			{
+				IPart.AddPlayerMessage("Chance for scary offense");
 				if ((Chance >= 100 || Stat.Random(1, 100) <= Chance))
 				{
 					GameObject gameObjectParameter = E.GetGameObjectParameter("Attacker");
 					GameObject gameObjectParameter2 = E.GetGameObjectParameter("Defender");
                     IPart.AddPlayerMessage(gameObjectParameter2.The+gameObjectParameter2.DisplayNameOnly+gameObjectParameter2.GetVerb("is")+" disturbed by "+ParentObject.the+ParentObject.DisplayNameOnly+"'s intimidating eyes.");
 					gameObjectParameter2.ApplyEffect(new Shaken(Stat.Random(300, 360), 1));
+					XRLCore.ParticleManager.Add("&R!", gameObjectParameter2.CurrentCell.X, gameObjectParameter2.CurrentCell.Y, num, num2);
+
 				}
 			}if (E.ID == "TakeDamage")
 			{
+				IPart.AddPlayerMessage("Chance for scary defense");
 				if ((ParentObject.GetPart<Armor>() != null || ParentObject.GetPart<Body>() != null)&& (Chance >= 100 || Stat.Random(1, 100) <= Chance))
 				{
 					GameObject gameObjectParameter = E.GetGameObjectParameter("Attacker");
                     IPart.AddPlayerMessage(gameObjectParameter.The+gameObjectParameter.DisplayNameOnly+gameObjectParameter.GetVerb("is")+" disturbed by "+ParentObject.the+ParentObject.DisplayNameOnly+"'s intimidating eyes.");
 					gameObjectParameter.ApplyEffect(new Shaken(Stat.Random(300, 360), 1));
+
+					XRLCore.ParticleManager.Add("&R!", gameObjectParameter.CurrentCell.X, gameObjectParameter.CurrentCell.Y, num, num2);
 				}
 			}
 			else if (E.ID == "GetShortDescription")
