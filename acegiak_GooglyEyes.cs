@@ -68,7 +68,7 @@ namespace XRL.World.Parts
 					{
 							if (cell.Objects.Count > 0 && cell.GetHighestRenderLayerObject()!= null)
 							{
-								Googlify(cell.GetHighestRenderLayerObject(),E.GetGameObjectParameter("Owner"));
+								Googlify(cell.GetHighestRenderLayerObject().SplitFromStack(),E.GetGameObjectParameter("Owner"));
 							}else{
                                 Popup.Show("The googly eyes don't stick.");
                                 return false;

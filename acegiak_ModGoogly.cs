@@ -55,6 +55,9 @@ namespace XRL.World.Parts
 			Object.RegisterPartEvent(this, "WeaponHit");
 			Object.RegisterPartEvent(this, "TakeDamage");
 			Object.RegisterPartEvent(this, "AfterLookedAt");
+			Object.RegisterPartEvent(this, "DefendMeleeHit");
+			Object.RegisterPartEvent(this, "Equipped");
+			Object.RegisterPartEvent(this, "Unequipped");
 			base.Register(Object);
 		}
 
@@ -85,23 +88,23 @@ namespace XRL.World.Parts
 			num2 = (float)Math.Cos(num3) / 6f;
 			if (E.ID == "WeaponHit")
 			{
-				IPart.AddPlayerMessage("Chance for scary offense");
+				//IPart.AddPlayerMessage("Chance for scary offense");
 				if ((Chance >= 100 || Stat.Random(1, 100) <= Chance))
 				{
 					GameObject gameObjectParameter = E.GetGameObjectParameter("Attacker");
 					GameObject gameObjectParameter2 = E.GetGameObjectParameter("Defender");
-                    IPart.AddPlayerMessage(gameObjectParameter2.The+gameObjectParameter2.DisplayNameOnly+gameObjectParameter2.GetVerb("is")+" disturbed by "+ParentObject.the+ParentObject.DisplayNameOnly+"'s intimidating eyes.");
+                    IPart.AddPlayerMessage(gameObjectParameter2.The+gameObjectParameter2.DisplayNameOnly+gameObjectParameter2.Is+" disturbed by "+ParentObject.the+ParentObject.DisplayNameOnly+"'s intimidating eyes.");
 					gameObjectParameter2.ApplyEffect(new Shaken(Stat.Random(300, 360), 1));
 					XRLCore.ParticleManager.Add("&R!", gameObjectParameter2.CurrentCell.X, gameObjectParameter2.CurrentCell.Y, num, num2);
 
 				}
-			}if (E.ID == "TakeDamage")
+			}if (E.ID == "DefendMeleeHit")
 			{
-				IPart.AddPlayerMessage("Chance for scary defense");
+				//IPart.AddPlayerMessage("Chance for scary defense");
 				if ((ParentObject.GetPart<Armor>() != null || ParentObject.GetPart<Body>() != null)&& (Chance >= 100 || Stat.Random(1, 100) <= Chance))
 				{
 					GameObject gameObjectParameter = E.GetGameObjectParameter("Attacker");
-                    IPart.AddPlayerMessage(gameObjectParameter.The+gameObjectParameter.DisplayNameOnly+gameObjectParameter.GetVerb("is")+" disturbed by "+ParentObject.the+ParentObject.DisplayNameOnly+"'s intimidating eyes.");
+                    IPart.AddPlayerMessage(gameObjectParameter.The+gameObjectParameter.DisplayNameOnly+gameObjectParameter.Is+" disturbed by "+ParentObject.the+ParentObject.DisplayNameOnly+"'s intimidating eyes.");
 					gameObjectParameter.ApplyEffect(new Shaken(Stat.Random(300, 360), 1));
 
 					XRLCore.ParticleManager.Add("&R!", gameObjectParameter.CurrentCell.X, gameObjectParameter.CurrentCell.Y, num, num2);
@@ -115,6 +118,18 @@ namespace XRL.World.Parts
 			{
 				E.GetParameter<StringBuilder>("DisplayName").Replace("eyeless ","");
 				E.GetParameter<StringBuilder>("Prefix").Append("&yg&Ko&yo&Kg&yly &y");
+			}
+			else if (E.ID == "Equipped")
+			{
+				GameObject gameObjectParameter = E.GetGameObjectParameter("EquippingObject");
+				// gameObjectParameter.ApplyEffect(new XRL.World.Parts.Effects.Spectacles());
+				gameObjectParameter.RegisterPartEvent(this, "DefendMeleeHit");
+			}
+			else if (E.ID == "Unequipped")
+			{
+				GameObject gameObjectParameter2 = E.GetGameObjectParameter("UnequippingObject");
+				// gameObjectParameter2.RemoveEffect("Spectacles");
+				gameObjectParameter2.UnregisterPartEvent(this, "DefendMeleeHit");
 			}
 			return base.FireEvent(E);
 		}
