@@ -63,6 +63,14 @@ namespace XRL.World.Parts
 
 		public override bool FireEvent(Event E)
 		{
+
+			int StartAngle = 85;
+			int EndAngle = 185;
+			float num = 0f;
+			float num2 = 0f;
+			float num3 = (float)XRL.Rules.Stat.RandomCosmetic(StartAngle, EndAngle) / 58f;
+			num = (float)Math.Sin(num3) / 6f;
+			num2 = (float)Math.Cos(num3) / 6f;
             if (E.ID == "AfterLookedAt")
 			{
 				GameObject gameObjectParameter = E.GetGameObjectParameter("Looker");
@@ -76,16 +84,11 @@ namespace XRL.World.Parts
                     }else{
                         IPart.AddPlayerMessage(gameObjectParameter.The+gameObjectParameter.DisplayNameOnly+gameObjectParameter.Is+" disturbed by "+ParentObject.the+ParentObject.DisplayNameOnly+"'s intimidating eyes.");
                     }
+					XRLCore.ParticleManager.Add("&R!", gameObjectParameter.CurrentCell.X, gameObjectParameter.CurrentCell.Y, num,num2);
+
 					gameObjectParameter.ApplyEffect(new Shaken(Stat.Random(300, 360), 1));
 				}
-			}
-			int StartAngle = 85;
-			int EndAngle = 185;
-			float num = 0f;
-			float num2 = 0f;
-			float num3 = (float)XRL.Rules.Stat.RandomCosmetic(StartAngle, EndAngle) / 58f;
-			num = (float)Math.Sin(num3) / 6f;
-			num2 = (float)Math.Cos(num3) / 6f;
+			}9
 			if (E.ID == "WeaponHit")
 			{
 				//IPart.AddPlayerMessage("Chance for scary offense");
