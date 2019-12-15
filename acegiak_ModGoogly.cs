@@ -88,7 +88,7 @@ namespace XRL.World.Parts
 
 					gameObjectParameter.ApplyEffect(new Shaken(Stat.Random(300, 360), 1));
 				}
-			}9
+			}
 			if (E.ID == "WeaponHit")
 			{
 				//IPart.AddPlayerMessage("Chance for scary offense");
